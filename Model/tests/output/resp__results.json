@@ -1,0 +1,392 @@
+{
+  "tag": "resp",
+  "unit": [
+    {
+      "name": "iou: identical boxes = 1",
+      "pass": true
+    },
+    {
+      "name": "iou: disjoint boxes = 0",
+      "pass": true
+    },
+    {
+      "name": "iou: half-shifted boxes = 1/3",
+      "pass": true
+    },
+    {
+      "name": "iou: zero-area box = 0",
+      "pass": true
+    },
+    {
+      "name": "category: car -> LMV",
+      "pass": true
+    },
+    {
+      "name": "category: bus -> HMV",
+      "pass": true
+    },
+    {
+      "name": "category: truck -> HMV",
+      "pass": true
+    },
+    {
+      "name": "category: motorcycle -> Motorcycle",
+      "pass": true
+    },
+    {
+      "name": "category: person -> null",
+      "pass": true
+    },
+    {
+      "name": "category: bicycle -> null (not motorised)",
+      "pass": true
+    },
+    {
+      "name": "fromModel: converts COCO-SSD {class} predictions to {label} detections",
+      "pass": true
+    },
+    {
+      "name": "fromDetr: converts Transformers.js {box} predictions to {bbox} detections",
+      "pass": true
+    },
+    {
+      "name": "filterVehicles drops non-vehicles and low scores",
+      "pass": true
+    },
+    {
+      "name": "merge: overlapping duplicates keep the higher score",
+      "pass": true
+    },
+    {
+      "name": "merge: same vehicle seen as car and truck counts once",
+      "pass": true
+    },
+    {
+      "name": "merge: separate vehicles are all kept",
+      "pass": true
+    },
+    {
+      "name": "merge: tile fragment inside a larger same-class box is dropped",
+      "pass": true
+    },
+    {
+      "name": "merge: nested boxes from the full image are both kept (car behind car)",
+      "pass": true
+    },
+    {
+      "name": "merge: small tile box inside a much bigger box is a real vehicle, kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: box enclosing 3+ other vehicle centres is dropped",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus with motorcycles in front is kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus overlapping two cars is kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus with cars crossing its edges is kept (real Jakarta case)",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: motorcycle box around a cluster of motorcycles is dropped",
+      "pass": true
+    },
+    {
+      "name": "merge: motorcycle in front of a bus is kept",
+      "pass": true
+    },
+    {
+      "name": "merge: does not mutate its input",
+      "pass": true
+    },
+    {
+      "name": "classify: assigns categories",
+      "pass": true
+    },
+    {
+      "name": "classify: small truck (pickup/van) relative to cars -> LMV",
+      "pass": true
+    },
+    {
+      "name": "classify: large truck relative to cars -> HMV",
+      "pass": true
+    },
+    {
+      "name": "classify: distant truck is compared with cars at the same distance, not near-camera cars",
+      "pass": true
+    },
+    {
+      "name": "classify: truck with no car at a similar distance -> HMV",
+      "pass": true
+    },
+    {
+      "name": "classify: truck with no cars for reference -> HMV",
+      "pass": true
+    },
+    {
+      "name": "summarize: counts per category and cars",
+      "pass": true
+    },
+    {
+      "name": "summarize: empty list is all zeros",
+      "pass": true
+    },
+    {
+      "name": "tileRects: 2x2 grid gives 4 in-bounds overlapping tiles",
+      "pass": true
+    },
+    {
+      "name": "offsetDetections maps tile coords back to image coords",
+      "pass": true
+    }
+  ],
+  "e2e": {
+    "rows": [
+      {
+        "file": "trucks-russia.jpg",
+        "expected": {
+          "total": 6,
+          "cars": 2,
+          "LMV": 2,
+          "HMV": 4,
+          "Motorcycle": 0
+        },
+        "got": {
+          "total": 6,
+          "cars": 2,
+          "LMV": 2,
+          "HMV": 4,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": 0,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "ms": 5155,
+        "detections": [
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.999,
+            "bbox": [
+              180,
+              422,
+              736,
+              323
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.995,
+            "bbox": [
+              966,
+              515,
+              167,
+              108
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.969,
+            "bbox": [
+              1214,
+              561,
+              53,
+              33
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.939,
+            "bbox": [
+              1201,
+              520,
+              70,
+              71
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.816,
+            "bbox": [
+              1255,
+              558,
+              29,
+              19
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.645,
+            "bbox": [
+              1138,
+              535,
+              71,
+              71
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "truck",
+            "score": 0.513,
+            "bbox": [
+              1137,
+              539,
+              67,
+              64
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.969,
+            "bbox": [
+              1214,
+              561,
+              53,
+              33
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.567,
+            "bbox": [
+              1198,
+              521,
+              73,
+              70
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.966,
+            "bbox": [
+              441,
+              484,
+              35,
+              69
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.939,
+            "bbox": [
+              1201,
+              520,
+              70,
+              71
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.645,
+            "bbox": [
+              1138,
+              535,
+              71,
+              71
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.816,
+            "bbox": [
+              1255,
+              558,
+              29,
+              19
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.999,
+            "bbox": [
+              180,
+              422,
+              736,
+              323
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.995,
+            "bbox": [
+              966,
+              515,
+              167,
+              108
+            ],
+            "source": "full"
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "total": {
+        "mae": 0,
+        "expectedTotal": 6,
+        "detectedTotal": 6
+      },
+      "cars": {
+        "mae": 0,
+        "expectedTotal": 2,
+        "detectedTotal": 2
+      },
+      "LMV": {
+        "mae": 0,
+        "expectedTotal": 2,
+        "detectedTotal": 2
+      },
+      "HMV": {
+        "mae": 0,
+        "expectedTotal": 4,
+        "detectedTotal": 4
+      },
+      "Motorcycle": {
+        "mae": 0,
+        "expectedTotal": 0,
+        "detectedTotal": 0
+      },
+      "countAccuracy": 1,
+      "avgMs": 5155,
+      "modelLoadMs": 529,
+      "backend": "onnx-wasm",
+      "model": "detr",
+      "options": {}
+    },
+    "responsiveness": {
+      "maxStallMs": 83,
+      "limitMs": 500,
+      "pass": true
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,6962 @@
+{
+  "tag": "ssd-tiles",
+  "unit": [
+    {
+      "name": "iou: identical boxes = 1",
+      "pass": true
+    },
+    {
+      "name": "iou: disjoint boxes = 0",
+      "pass": true
+    },
+    {
+      "name": "iou: half-shifted boxes = 1/3",
+      "pass": true
+    },
+    {
+      "name": "iou: zero-area box = 0",
+      "pass": true
+    },
+    {
+      "name": "category: car -> LMV",
+      "pass": true
+    },
+    {
+      "name": "category: bus -> HMV",
+      "pass": true
+    },
+    {
+      "name": "category: truck -> HMV",
+      "pass": true
+    },
+    {
+      "name": "category: motorcycle -> Motorcycle",
+      "pass": true
+    },
+    {
+      "name": "category: person -> null",
+      "pass": true
+    },
+    {
+      "name": "category: bicycle -> null (not motorised)",
+      "pass": true
+    },
+    {
+      "name": "fromModel: converts COCO-SSD {class} predictions to {label} detections",
+      "pass": true
+    },
+    {
+      "name": "fromDetr: converts Transformers.js {box} predictions to {bbox} detections",
+      "pass": true
+    },
+    {
+      "name": "filterVehicles drops non-vehicles and low scores",
+      "pass": true
+    },
+    {
+      "name": "merge: overlapping duplicates keep the higher score",
+      "pass": true
+    },
+    {
+      "name": "merge: same vehicle seen as car and truck counts once",
+      "pass": true
+    },
+    {
+      "name": "merge: separate vehicles are all kept",
+      "pass": true
+    },
+    {
+      "name": "merge: tile fragment inside a larger same-class box is dropped",
+      "pass": true
+    },
+    {
+      "name": "merge: nested boxes from the full image are both kept (car behind car)",
+      "pass": true
+    },
+    {
+      "name": "merge: small tile box inside a much bigger box is a real vehicle, kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: box enclosing 3+ other vehicle centres is dropped",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus with motorcycles in front is kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus overlapping two cars is kept",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: bus with cars crossing its edges is kept (real Jakarta case)",
+      "pass": true
+    },
+    {
+      "name": "removeGroupBoxes: motorcycle box around a cluster of motorcycles is dropped",
+      "pass": true
+    },
+    {
+      "name": "merge: motorcycle in front of a bus is kept",
+      "pass": true
+    },
+    {
+      "name": "merge: does not mutate its input",
+      "pass": true
+    },
+    {
+      "name": "classify: assigns categories",
+      "pass": true
+    },
+    {
+      "name": "classify: small truck (pickup/van) relative to cars -> LMV",
+      "pass": true
+    },
+    {
+      "name": "classify: large truck relative to cars -> HMV",
+      "pass": true
+    },
+    {
+      "name": "classify: distant truck is compared with cars at the same distance, not near-camera cars",
+      "pass": true
+    },
+    {
+      "name": "classify: truck with no car at a similar distance -> HMV",
+      "pass": true
+    },
+    {
+      "name": "classify: truck with no cars for reference -> HMV",
+      "pass": true
+    },
+    {
+      "name": "summarize: counts per category and cars",
+      "pass": true
+    },
+    {
+      "name": "summarize: empty list is all zeros",
+      "pass": true
+    },
+    {
+      "name": "tileRects: 2x2 grid gives 4 in-bounds overlapping tiles",
+      "pass": true
+    },
+    {
+      "name": "offsetDetections maps tile coords back to image coords",
+      "pass": true
+    }
+  ],
+  "e2e": {
+    "rows": [
+      {
+        "file": "highway-jam-malaysia.jpg",
+        "expected": {
+          "total": 32,
+          "cars": 28,
+          "LMV": 30,
+          "HMV": 1,
+          "Motorcycle": 1,
+          "dense": true
+        },
+        "got": {
+          "total": 12,
+          "cars": 11,
+          "LMV": 11,
+          "HMV": 1,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -20,
+          "cars": -17,
+          "LMV": -19,
+          "HMV": 0,
+          "Motorcycle": -1
+        },
+        "ms": 5174,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.954,
+            "bbox": [
+              586,
+              446,
+              171,
+              178
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.942,
+            "bbox": [
+              20,
+              356,
+              530,
+              363
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.91,
+            "bbox": [
+              406,
+              416,
+              238,
+              283
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.845,
+            "bbox": [
+              932,
+              328,
+              338,
+              393
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.826,
+            "bbox": [
+              711,
+              423,
+              121,
+              127
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.751,
+            "bbox": [
+              675,
+              438,
+              126,
+              167
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.66,
+            "bbox": [
+              632,
+              355,
+              57,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.577,
+            "bbox": [
+              593,
+              374,
+              62,
+              23
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.521,
+            "bbox": [
+              718,
+              358,
+              47,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.488,
+            "bbox": [
+              601,
+              358,
+              57,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.435,
+            "bbox": [
+              1,
+              186,
+              387,
+              210
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.414,
+            "bbox": [
+              682,
+              357,
+              29,
+              29
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.942,
+            "bbox": [
+              20,
+              356,
+              530,
+              363
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.771,
+            "bbox": [
+              959,
+              74,
+              317,
+              655
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.755,
+            "bbox": [
+              583,
+              432,
+              164,
+              191
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.514,
+            "bbox": [
+              431,
+              393,
+              230,
+              290
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.544,
+            "bbox": [
+              622,
+              354,
+              66,
+              35
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.435,
+            "bbox": [
+              1,
+              186,
+              387,
+              210
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.66,
+            "bbox": [
+              632,
+              355,
+              57,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.577,
+            "bbox": [
+              593,
+              374,
+              62,
+              23
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.521,
+            "bbox": [
+              718,
+              358,
+              47,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.488,
+            "bbox": [
+              601,
+              358,
+              57,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.414,
+            "bbox": [
+              682,
+              357,
+              29,
+              29
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.91,
+            "bbox": [
+              406,
+              416,
+              238,
+              283
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.689,
+            "bbox": [
+              576,
+              443,
+              136,
+              178
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.603,
+            "bbox": [
+              39,
+              361,
+              453,
+              351
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.954,
+            "bbox": [
+              586,
+              446,
+              171,
+              178
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.845,
+            "bbox": [
+              932,
+              328,
+              338,
+              393
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.826,
+            "bbox": [
+              711,
+              423,
+              121,
+              127
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.751,
+            "bbox": [
+              675,
+              438,
+              126,
+              167
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.418,
+            "bbox": [
+              587,
+              337,
+              527,
+              219
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "highway-jam-m62.jpg",
+        "expected": {
+          "total": 38,
+          "cars": 20,
+          "LMV": 22,
+          "HMV": 16,
+          "Motorcycle": 0,
+          "dense": true
+        },
+        "got": {
+          "total": 16,
+          "cars": 15,
+          "LMV": 15,
+          "HMV": 1,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -22,
+          "cars": -5,
+          "LMV": -7,
+          "HMV": -15,
+          "Motorcycle": 0
+        },
+        "ms": 7145,
+        "detections": [
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.829,
+            "bbox": [
+              313,
+              624,
+              212,
+              195
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.771,
+            "bbox": [
+              360,
+              549,
+              46,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.765,
+            "bbox": [
+              740,
+              660,
+              52,
+              41
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.655,
+            "bbox": [
+              139,
+              564,
+              44,
+              35
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.634,
+            "bbox": [
+              349,
+              476,
+              21,
+              17
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.58,
+            "bbox": [
+              569,
+              445,
+              26,
+              12
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.522,
+            "bbox": [
+              691,
+              519,
+              59,
+              55
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.522,
+            "bbox": [
+              277,
+              562,
+              48,
+              33
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.477,
+            "bbox": [
+              291,
+              502,
+              34,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.476,
+            "bbox": [
+              539,
+              511,
+              60,
+              64
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.473,
+            "bbox": [
+              565,
+              457,
+              36,
+              41
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.469,
+            "bbox": [
+              553,
+              566,
+              112,
+              119
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.46,
+            "bbox": [
+              606,
+              481,
+              41,
+              39
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.44,
+            "bbox": [
+              303,
+              500,
+              27,
+              18
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.438,
+            "bbox": [
+              714,
+              586,
+              40,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.416,
+            "bbox": [
+              496,
+              441,
+              21,
+              17
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.765,
+            "bbox": [
+              740,
+              660,
+              52,
+              41
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.606,
+            "bbox": [
+              392,
+              420,
+              10,
+              17
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.59,
+            "bbox": [
+              4,
+              413,
+              1123,
+              412
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.557,
+            "bbox": [
+              130,
+              569,
+              52,
+              32
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.522,
+            "bbox": [
+              691,
+              519,
+              59,
+              55
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.522,
+            "bbox": [
+              277,
+              562,
+              48,
+              33
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.49,
+            "bbox": [
+              443,
+              417,
+              13,
+              21
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.476,
+            "bbox": [
+              539,
+              511,
+              60,
+              64
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.44,
+            "bbox": [
+              303,
+              500,
+              27,
+              18
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.58,
+            "bbox": [
+              569,
+              445,
+              26,
+              12
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.416,
+            "bbox": [
+              496,
+              441,
+              21,
+              17
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.829,
+            "bbox": [
+              313,
+              624,
+              212,
+              195
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.771,
+            "bbox": [
+              360,
+              549,
+              46,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.655,
+            "bbox": [
+              139,
+              564,
+              44,
+              35
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.634,
+            "bbox": [
+              349,
+              476,
+              21,
+              17
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.477,
+            "bbox": [
+              291,
+              502,
+              34,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.473,
+            "bbox": [
+              565,
+              457,
+              36,
+              41
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.469,
+            "bbox": [
+              553,
+              566,
+              112,
+              119
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.46,
+            "bbox": [
+              606,
+              481,
+              41,
+              39
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.425,
+            "bbox": [
+              278,
+              564,
+              49,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.421,
+            "bbox": [
+              113,
+              404,
+              592,
+              341
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.535,
+            "bbox": [
+              570,
+              419,
+              521,
+              404
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.438,
+            "bbox": [
+              714,
+              586,
+              40,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.422,
+            "bbox": [
+              734,
+              671,
+              52,
+              37
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "highway-jam-d1.jpg",
+        "expected": {
+          "total": 16,
+          "cars": 9,
+          "LMV": 10,
+          "HMV": 6,
+          "Motorcycle": 0
+        },
+        "got": {
+          "total": 13,
+          "cars": 10,
+          "LMV": 10,
+          "HMV": 3,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -3,
+          "cars": 1,
+          "LMV": 0,
+          "HMV": -3,
+          "Motorcycle": 0
+        },
+        "ms": 7373,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.933,
+            "bbox": [
+              713,
+              485,
+              574,
+              366
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.875,
+            "bbox": [
+              697,
+              326,
+              121,
+              109
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.85,
+            "bbox": [
+              764,
+              318,
+              358,
+              158
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.829,
+            "bbox": [
+              453,
+              303,
+              43,
+              25
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.808,
+            "bbox": [
+              833,
+              84,
+              423,
+              381
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.665,
+            "bbox": [
+              630,
+              311,
+              61,
+              61
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.658,
+            "bbox": [
+              494,
+              302,
+              30,
+              16
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.657,
+            "bbox": [
+              753,
+              378,
+              373,
+              158
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.574,
+            "bbox": [
+              648,
+              315,
+              76,
+              68
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.435,
+            "bbox": [
+              598,
+              275,
+              53,
+              69
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.432,
+            "bbox": [
+              610,
+              312,
+              30,
+              43
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.425,
+            "bbox": [
+              1127,
+              402,
+              134,
+              75
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.401,
+            "bbox": [
+              409,
+              306,
+              33,
+              18
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.933,
+            "bbox": [
+              713,
+              485,
+              574,
+              366
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.843,
+            "bbox": [
+              721,
+              327,
+              76,
+              99
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.615,
+            "bbox": [
+              623,
+              299,
+              75,
+              76
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.605,
+            "bbox": [
+              812,
+              322,
+              297,
+              182
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.574,
+            "bbox": [
+              648,
+              315,
+              76,
+              68
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.497,
+            "bbox": [
+              876,
+              100,
+              388,
+              348
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.425,
+            "bbox": [
+              1127,
+              402,
+              134,
+              75
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.829,
+            "bbox": [
+              453,
+              303,
+              43,
+              25
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.665,
+            "bbox": [
+              630,
+              311,
+              61,
+              61
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.658,
+            "bbox": [
+              494,
+              302,
+              30,
+              16
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.435,
+            "bbox": [
+              598,
+              275,
+              53,
+              69
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.401,
+            "bbox": [
+              409,
+              306,
+              33,
+              18
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.875,
+            "bbox": [
+              697,
+              326,
+              121,
+              109
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.85,
+            "bbox": [
+              764,
+              318,
+              358,
+              158
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.808,
+            "bbox": [
+              833,
+              84,
+              423,
+              381
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.56,
+            "bbox": [
+              639,
+              312,
+              64,
+              56
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.432,
+            "bbox": [
+              610,
+              312,
+              30,
+              43
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.789,
+            "bbox": [
+              720,
+              494,
+              560,
+              357
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.657,
+            "bbox": [
+              753,
+              378,
+              373,
+              158
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "city-bangalore.jpg",
+        "expected": {
+          "total": 20,
+          "cars": 6,
+          "LMV": 11,
+          "HMV": 2,
+          "Motorcycle": 7
+        },
+        "got": {
+          "total": 9,
+          "cars": 4,
+          "LMV": 5,
+          "HMV": 2,
+          "Motorcycle": 2
+        },
+        "err": {
+          "total": -11,
+          "cars": -2,
+          "LMV": -6,
+          "HMV": 0,
+          "Motorcycle": -5
+        },
+        "ms": 7267,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.989,
+            "bbox": [
+              937,
+              451,
+              318,
+              129
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.982,
+            "bbox": [
+              985,
+              503,
+              203,
+              149
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.93,
+            "bbox": [
+              575,
+              412,
+              291,
+              232
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.612,
+            "bbox": [
+              203,
+              436,
+              165,
+              119
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "LMV",
+            "score": 0.602,
+            "bbox": [
+              16,
+              416,
+              149,
+              159
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.554,
+            "bbox": [
+              446,
+              383,
+              214,
+              131
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.494,
+            "bbox": [
+              281,
+              420,
+              69,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.439,
+            "bbox": [
+              399,
+              478,
+              56,
+              71
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.419,
+            "bbox": [
+              987,
+              442,
+              135,
+              60
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "truck",
+            "score": 0.707,
+            "bbox": [
+              573,
+              409,
+              281,
+              230
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.611,
+            "bbox": [
+              413,
+              434,
+              52,
+              86
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.543,
+            "bbox": [
+              859,
+              466,
+              102,
+              123
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.534,
+            "bbox": [
+              980,
+              435,
+              288,
+              136
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.517,
+            "bbox": [
+              1045,
+              473,
+              142,
+              164
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.508,
+            "bbox": [
+              893,
+              445,
+              48,
+              46
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.485,
+            "bbox": [
+              378,
+              436,
+              35,
+              66
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.439,
+            "bbox": [
+              399,
+              478,
+              56,
+              71
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.419,
+            "bbox": [
+              987,
+              442,
+              135,
+              60
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.649,
+            "bbox": [
+              344,
+              420,
+              30,
+              39
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.573,
+            "bbox": [
+              371,
+              422,
+              27,
+              42
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.548,
+            "bbox": [
+              411,
+              424,
+              29,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.494,
+            "bbox": [
+              281,
+              420,
+              69,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.563,
+            "bbox": [
+              876,
+              423,
+              26,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.427,
+            "bbox": [
+              918,
+              423,
+              28,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.612,
+            "bbox": [
+              203,
+              436,
+              165,
+              119
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.602,
+            "bbox": [
+              16,
+              416,
+              149,
+              159
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.554,
+            "bbox": [
+              446,
+              383,
+              214,
+              131
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.437,
+            "bbox": [
+              404,
+              432,
+              43,
+              78
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.416,
+            "bbox": [
+              341,
+              422,
+              30,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.989,
+            "bbox": [
+              937,
+              451,
+              318,
+              129
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.982,
+            "bbox": [
+              985,
+              503,
+              203,
+              149
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.93,
+            "bbox": [
+              575,
+              412,
+              291,
+              232
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.833,
+            "bbox": [
+              832,
+              466,
+              116,
+              149
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.814,
+            "bbox": [
+              1065,
+              446,
+              100,
+              161
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "city-delhi-motion.jpg",
+        "expected": {
+          "total": 7,
+          "cars": 5,
+          "LMV": 6,
+          "HMV": 0,
+          "Motorcycle": 1
+        },
+        "got": {
+          "total": 3,
+          "cars": 3,
+          "LMV": 3,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -4,
+          "cars": -2,
+          "LMV": -3,
+          "HMV": 0,
+          "Motorcycle": -1
+        },
+        "ms": 7063,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.666,
+            "bbox": [
+              660,
+              219,
+              205,
+              82
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.664,
+            "bbox": [
+              666,
+              221,
+              581,
+              175
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.544,
+            "bbox": [
+              2,
+              236,
+              160,
+              194
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.664,
+            "bbox": [
+              666,
+              221,
+              581,
+              175
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.544,
+            "bbox": [
+              2,
+              236,
+              160,
+              194
+            ],
+            "source": "full"
+          },
+          {
+            "label": "traffic light",
+            "score": 0.445,
+            "bbox": [
+              13,
+              143,
+              21,
+              35
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.778,
+            "bbox": [
+              525,
+              205,
+              171,
+              208
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.606,
+            "bbox": [
+              29,
+              225,
+              127,
+              131
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.666,
+            "bbox": [
+              660,
+              219,
+              205,
+              82
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.423,
+            "bbox": [
+              568,
+              199,
+              129,
+              233
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bicycle",
+            "score": 0.48,
+            "bbox": [
+              297,
+              395,
+              315,
+              204
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "motorcycles-hyderabad.jpg",
+        "expected": {
+          "total": 17,
+          "cars": 3,
+          "LMV": 7,
+          "HMV": 0,
+          "Motorcycle": 10
+        },
+        "got": {
+          "total": 4,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Motorcycle": 4
+        },
+        "err": {
+          "total": -13,
+          "cars": -3,
+          "LMV": -7,
+          "HMV": 0,
+          "Motorcycle": -6
+        },
+        "ms": 7172,
+        "detections": [
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.949,
+            "bbox": [
+              783,
+              556,
+              498,
+              387
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.867,
+            "bbox": [
+              566,
+              529,
+              322,
+              303
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.828,
+            "bbox": [
+              91,
+              467,
+              467,
+              461
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.575,
+            "bbox": [
+              3,
+              564,
+              210,
+              325
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "person",
+            "score": 0.983,
+            "bbox": [
+              46,
+              404,
+              424,
+              534
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.949,
+            "bbox": [
+              783,
+              556,
+              498,
+              387
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.701,
+            "bbox": [
+              925,
+              367,
+              90,
+              115
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.654,
+            "bbox": [
+              711,
+              342,
+              155,
+              209
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.622,
+            "bbox": [
+              951,
+              311,
+              315,
+              375
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.575,
+            "bbox": [
+              3,
+              564,
+              210,
+              325
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.563,
+            "bbox": [
+              531,
+              562,
+              382,
+              252
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.454,
+            "bbox": [
+              527,
+              376,
+              206,
+              263
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.412,
+            "bbox": [
+              121,
+              387,
+              80,
+              108
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.933,
+            "bbox": [
+              121,
+              374,
+              244,
+              162
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.868,
+            "bbox": [
+              88,
+              382,
+              116,
+              142
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.739,
+            "bbox": [
+              331,
+              331,
+              180,
+              202
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.587,
+            "bbox": [
+              574,
+              376,
+              134,
+              153
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.639,
+            "bbox": [
+              966,
+              282,
+              320,
+              253
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.628,
+            "bbox": [
+              918,
+              343,
+              184,
+              177
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "backpack",
+            "score": 0.452,
+            "bbox": [
+              786,
+              405,
+              109,
+              124
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.422,
+            "bbox": [
+              581,
+              376,
+              140,
+              152
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.828,
+            "bbox": [
+              91,
+              467,
+              467,
+              461
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.731,
+            "bbox": [
+              510,
+              443,
+              189,
+              261
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.867,
+            "bbox": [
+              566,
+              529,
+              322,
+              303
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.866,
+            "bbox": [
+              762,
+              494,
+              502,
+              447
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "mixed-pune.jpg",
+        "expected": {
+          "total": 11,
+          "cars": 3,
+          "LMV": 4,
+          "HMV": 4,
+          "Motorcycle": 3
+        },
+        "got": {
+          "total": 6,
+          "cars": 1,
+          "LMV": 1,
+          "HMV": 1,
+          "Motorcycle": 4
+        },
+        "err": {
+          "total": -5,
+          "cars": -2,
+          "LMV": -3,
+          "HMV": -3,
+          "Motorcycle": 1
+        },
+        "ms": 6745,
+        "detections": [
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.99,
+            "bbox": [
+              74,
+              150,
+              746,
+              447
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.918,
+            "bbox": [
+              896,
+              374,
+              150,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.792,
+            "bbox": [
+              565,
+              428,
+              168,
+              224
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.71,
+            "bbox": [
+              769,
+              403,
+              124,
+              178
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.623,
+            "bbox": [
+              479,
+              452,
+              232,
+              243
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.552,
+            "bbox": [
+              1092,
+              470,
+              91,
+              77
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "truck",
+            "score": 0.99,
+            "bbox": [
+              74,
+              150,
+              746,
+              447
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.892,
+            "bbox": [
+              554,
+              340,
+              160,
+              286
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.825,
+            "bbox": [
+              898,
+              382,
+              139,
+              87
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.627,
+            "bbox": [
+              825,
+              370,
+              58,
+              73
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.615,
+            "bbox": [
+              1069,
+              391,
+              81,
+              100
+            ],
+            "source": "full"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.552,
+            "bbox": [
+              1092,
+              470,
+              91,
+              77
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.476,
+            "bbox": [
+              36,
+              144,
+              651,
+              253
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "airplane",
+            "score": 0.576,
+            "bbox": [
+              569,
+              161,
+              264,
+              236
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.876,
+            "bbox": [
+              539,
+              335,
+              160,
+              296
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.702,
+            "bbox": [
+              52,
+              322,
+              565,
+              283
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.623,
+            "bbox": [
+              479,
+              452,
+              232,
+              243
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.956,
+            "bbox": [
+              1076,
+              381,
+              89,
+              149
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.918,
+            "bbox": [
+              896,
+              374,
+              150,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.792,
+            "bbox": [
+              565,
+              428,
+              168,
+              224
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.71,
+            "bbox": [
+              769,
+              403,
+              124,
+              178
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "bus-firetruck-jakarta.jpg",
+        "expected": {
+          "total": 18,
+          "cars": 5,
+          "LMV": 7,
+          "HMV": 2,
+          "Motorcycle": 9
+        },
+        "got": {
+          "total": 14,
+          "cars": 5,
+          "LMV": 5,
+          "HMV": 6,
+          "Motorcycle": 3
+        },
+        "err": {
+          "total": -4,
+          "cars": 0,
+          "LMV": -2,
+          "HMV": 4,
+          "Motorcycle": -6
+        },
+        "ms": 6959,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.996,
+            "bbox": [
+              566,
+              621,
+              570,
+              266
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.983,
+            "bbox": [
+              55,
+              586,
+              338,
+              236
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.944,
+            "bbox": [
+              804,
+              799,
+              247,
+              160
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.924,
+            "bbox": [
+              675,
+              59,
+              295,
+              205
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.899,
+            "bbox": [
+              199,
+              428,
+              509,
+              269
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.891,
+            "bbox": [
+              261,
+              786,
+              241,
+              146
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.779,
+            "bbox": [
+              215,
+              28,
+              477,
+              297
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.739,
+            "bbox": [
+              233,
+              295,
+              483,
+              236
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.71,
+            "bbox": [
+              576,
+              675,
+              131,
+              205
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.701,
+            "bbox": [
+              570,
+              428,
+              548,
+              282
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.697,
+            "bbox": [
+              0,
+              428,
+              174,
+              202
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "category": "Motorcycle",
+            "score": 0.676,
+            "bbox": [
+              1130,
+              631,
+              118,
+              142
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.622,
+            "bbox": [
+              2,
+              99,
+              173,
+              152
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.594,
+            "bbox": [
+              571,
+              290,
+              501,
+              246
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.996,
+            "bbox": [
+              566,
+              621,
+              570,
+              266
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "score": 0.989,
+            "bbox": [
+              217,
+              302,
+              891,
+              382
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.653,
+            "bbox": [
+              141,
+              4,
+              1132,
+              436
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.625,
+            "bbox": [
+              -2,
+              414,
+              159,
+              219
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.62,
+            "bbox": [
+              966,
+              169,
+              51,
+              106
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.615,
+            "bbox": [
+              1110,
+              113,
+              46,
+              110
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.521,
+            "bbox": [
+              988,
+              82,
+              36,
+              76
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.4,
+            "bbox": [
+              1010,
+              83,
+              41,
+              89
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.779,
+            "bbox": [
+              215,
+              28,
+              477,
+              297
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.739,
+            "bbox": [
+              233,
+              295,
+              483,
+              236
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.708,
+            "bbox": [
+              112,
+              7,
+              46,
+              78
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.622,
+            "bbox": [
+              2,
+              99,
+              173,
+              152
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.532,
+            "bbox": [
+              612,
+              58,
+              30,
+              39
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.491,
+            "bbox": [
+              4,
+              416,
+              171,
+              113
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.924,
+            "bbox": [
+              675,
+              59,
+              295,
+              205
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.685,
+            "bbox": [
+              562,
+              19,
+              692,
+              271
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.594,
+            "bbox": [
+              571,
+              290,
+              501,
+              246
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.458,
+            "bbox": [
+              1203,
+              122,
+              30,
+              74
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.983,
+            "bbox": [
+              55,
+              586,
+              338,
+              236
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.899,
+            "bbox": [
+              199,
+              428,
+              509,
+              269
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.891,
+            "bbox": [
+              261,
+              786,
+              241,
+              146
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.71,
+            "bbox": [
+              576,
+              675,
+              131,
+              205
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.697,
+            "bbox": [
+              0,
+              428,
+              174,
+              202
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.944,
+            "bbox": [
+              804,
+              799,
+              247,
+              160
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.77,
+            "bbox": [
+              573,
+              623,
+              582,
+              262
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.701,
+            "bbox": [
+              570,
+              428,
+              548,
+              282
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.676,
+            "bbox": [
+              1130,
+              631,
+              118,
+              142
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "city-bangkok.jpg",
+        "expected": {
+          "total": 53,
+          "cars": 48,
+          "LMV": 50,
+          "HMV": 2,
+          "Motorcycle": 1,
+          "dense": true
+        },
+        "got": {
+          "total": 24,
+          "cars": 23,
+          "LMV": 23,
+          "HMV": 1,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -29,
+          "cars": -25,
+          "LMV": -27,
+          "HMV": -1,
+          "Motorcycle": -1
+        },
+        "ms": 6752,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.908,
+            "bbox": [
+              134,
+              400,
+              123,
+              121
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.822,
+            "bbox": [
+              928,
+              429,
+              75,
+              56
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.74,
+            "bbox": [
+              78,
+              295,
+              48,
+              43
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.721,
+            "bbox": [
+              689,
+              378,
+              90,
+              52
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.711,
+            "bbox": [
+              234,
+              396,
+              190,
+              157
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.694,
+            "bbox": [
+              598,
+              350,
+              48,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.63,
+            "bbox": [
+              91,
+              326,
+              58,
+              54
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.571,
+            "bbox": [
+              665,
+              365,
+              40,
+              29
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.565,
+            "bbox": [
+              390,
+              327,
+              176,
+              108
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.554,
+            "bbox": [
+              172,
+              288,
+              58,
+              70
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.542,
+            "bbox": [
+              120,
+              360,
+              80,
+              77
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.532,
+            "bbox": [
+              119,
+              248,
+              44,
+              46
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.505,
+            "bbox": [
+              585,
+              465,
+              204,
+              172
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.502,
+            "bbox": [
+              216,
+              252,
+              42,
+              40
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.5,
+            "bbox": [
+              116,
+              317,
+              67,
+              65
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.498,
+            "bbox": [
+              551,
+              336,
+              69,
+              36
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.494,
+            "bbox": [
+              181,
+              249,
+              45,
+              38
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.488,
+            "bbox": [
+              408,
+              400,
+              307,
+              265
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.477,
+            "bbox": [
+              241,
+              316,
+              63,
+              57
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.445,
+            "bbox": [
+              98,
+              291,
+              45,
+              31
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.444,
+            "bbox": [
+              3,
+              217,
+              24,
+              17
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.421,
+            "bbox": [
+              112,
+              361,
+              107,
+              115
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.407,
+            "bbox": [
+              166,
+              218,
+              19,
+              12
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.402,
+            "bbox": [
+              774,
+              588,
+              262,
+              162
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.8,
+            "bbox": [
+              25,
+              123,
+              1219,
+              644
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.63,
+            "bbox": [
+              91,
+              326,
+              58,
+              54
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.542,
+            "bbox": [
+              120,
+              360,
+              80,
+              77
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.5,
+            "bbox": [
+              116,
+              317,
+              67,
+              65
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.445,
+            "bbox": [
+              98,
+              291,
+              45,
+              31
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.74,
+            "bbox": [
+              78,
+              295,
+              48,
+              43
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.694,
+            "bbox": [
+              598,
+              350,
+              48,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.61,
+            "bbox": [
+              67,
+              206,
+              621,
+              271
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.571,
+            "bbox": [
+              665,
+              365,
+              40,
+              29
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.565,
+            "bbox": [
+              390,
+              327,
+              176,
+              108
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.554,
+            "bbox": [
+              172,
+              288,
+              58,
+              70
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.533,
+            "bbox": [
+              107,
+              328,
+              58,
+              53
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.532,
+            "bbox": [
+              119,
+              248,
+              44,
+              46
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.502,
+            "bbox": [
+              216,
+              252,
+              42,
+              40
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.498,
+            "bbox": [
+              551,
+              336,
+              69,
+              36
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.494,
+            "bbox": [
+              181,
+              249,
+              45,
+              38
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.477,
+            "bbox": [
+              241,
+              316,
+              63,
+              57
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.444,
+            "bbox": [
+              3,
+              217,
+              24,
+              17
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.421,
+            "bbox": [
+              112,
+              361,
+              107,
+              115
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.407,
+            "bbox": [
+              166,
+              218,
+              19,
+              12
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.77,
+            "bbox": [
+              929,
+              428,
+              74,
+              54
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.721,
+            "bbox": [
+              689,
+              378,
+              90,
+              52
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.685,
+            "bbox": [
+              767,
+              61,
+              211,
+              211
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.626,
+            "bbox": [
+              596,
+              349,
+              52,
+              34
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.492,
+            "bbox": [
+              571,
+              337,
+              55,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.908,
+            "bbox": [
+              134,
+              400,
+              123,
+              121
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.711,
+            "bbox": [
+              234,
+              396,
+              190,
+              157
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.488,
+            "bbox": [
+              408,
+              400,
+              307,
+              265
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.822,
+            "bbox": [
+              928,
+              429,
+              75,
+              56
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.505,
+            "bbox": [
+              585,
+              465,
+              204,
+              172
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.473,
+            "bbox": [
+              702,
+              394,
+              74,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.402,
+            "bbox": [
+              774,
+              588,
+              262,
+              162
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "city-traffic.jpg",
+        "expected": {
+          "total": 0,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Motorcycle": 0,
+          "note": "long exposure, only light trails: false-positive check"
+        },
+        "got": {
+          "total": 0,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": 0,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "ms": 7120,
+        "detections": [],
+        "raw": [
+          {
+            "label": "train",
+            "score": 0.482,
+            "bbox": [
+              -7,
+              335,
+              575,
+              118
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "train",
+            "score": 0.447,
+            "bbox": [
+              612,
+              247,
+              506,
+              157
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bicycle",
+            "score": 0.446,
+            "bbox": [
+              23,
+              425,
+              177,
+              199
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "train",
+            "score": 0.44,
+            "bbox": [
+              42,
+              372,
+              628,
+              215
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "jam-delhi.jpg",
+        "expected": {
+          "total": 70,
+          "cars": 43,
+          "LMV": 55,
+          "HMV": 5,
+          "Motorcycle": 10,
+          "dense": true
+        },
+        "got": {
+          "total": 30,
+          "cars": 25,
+          "LMV": 25,
+          "HMV": 5,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -40,
+          "cars": -18,
+          "LMV": -30,
+          "HMV": 0,
+          "Motorcycle": -10
+        },
+        "ms": 7036,
+        "detections": [
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.988,
+            "bbox": [
+              104,
+              164,
+              319,
+              230
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.954,
+            "bbox": [
+              627,
+              419,
+              177,
+              112
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.922,
+            "bbox": [
+              788,
+              356,
+              181,
+              129
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.909,
+            "bbox": [
+              593,
+              489,
+              227,
+              212
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.906,
+            "bbox": [
+              298,
+              390,
+              169,
+              123
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.895,
+            "bbox": [
+              456,
+              458,
+              156,
+              163
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.87,
+            "bbox": [
+              592,
+              373,
+              156,
+              124
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.837,
+            "bbox": [
+              833,
+              455,
+              185,
+              103
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.824,
+            "bbox": [
+              796,
+              241,
+              111,
+              73
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.791,
+            "bbox": [
+              719,
+              306,
+              97,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.791,
+            "bbox": [
+              83,
+              510,
+              191,
+              145
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.746,
+            "bbox": [
+              306,
+              578,
+              204,
+              162
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.64,
+            "bbox": [
+              856,
+              635,
+              167,
+              131
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.62,
+            "bbox": [
+              718,
+              222,
+              98,
+              87
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.614,
+            "bbox": [
+              228,
+              134,
+              256,
+              243
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.613,
+            "bbox": [
+              863,
+              465,
+              152,
+              169
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.568,
+            "bbox": [
+              238,
+              403,
+              197,
+              176
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.553,
+            "bbox": [
+              580,
+              357,
+              170,
+              68
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.545,
+            "bbox": [
+              717,
+              535,
+              181,
+              224
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.524,
+            "bbox": [
+              603,
+              41,
+              140,
+              88
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.51,
+            "bbox": [
+              458,
+              360,
+              138,
+              67
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.497,
+            "bbox": [
+              785,
+              314,
+              130,
+              111
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.494,
+            "bbox": [
+              336,
+              524,
+              204,
+              110
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.485,
+            "bbox": [
+              60,
+              345,
+              133,
+              59
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.476,
+            "bbox": [
+              413,
+              124,
+              115,
+              164
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.471,
+            "bbox": [
+              582,
+              255,
+              84,
+              86
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.469,
+            "bbox": [
+              902,
+              184,
+              96,
+              100
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.441,
+            "bbox": [
+              463,
+              279,
+              134,
+              80
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.438,
+            "bbox": [
+              62,
+              416,
+              177,
+              180
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.421,
+            "bbox": [
+              824,
+              132,
+              62,
+              37
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.851,
+            "bbox": [
+              4,
+              11,
+              1018,
+              721
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.756,
+            "bbox": [
+              425,
+              449,
+              192,
+              176
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "score": 0.614,
+            "bbox": [
+              228,
+              134,
+              256,
+              243
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.613,
+            "bbox": [
+              863,
+              465,
+              152,
+              169
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.593,
+            "bbox": [
+              306,
+              554,
+              210,
+              181
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.568,
+            "bbox": [
+              238,
+              403,
+              197,
+              176
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.566,
+            "bbox": [
+              594,
+              494,
+              181,
+              194
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.516,
+            "bbox": [
+              790,
+              363,
+              193,
+              132
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.438,
+            "bbox": [
+              62,
+              416,
+              177,
+              180
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "score": 0.988,
+            "bbox": [
+              104,
+              164,
+              319,
+              230
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.485,
+            "bbox": [
+              60,
+              345,
+              133,
+              59
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.481,
+            "bbox": [
+              428,
+              353,
+              143,
+              74
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.476,
+            "bbox": [
+              413,
+              124,
+              115,
+              164
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.824,
+            "bbox": [
+              796,
+              241,
+              111,
+              73
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.791,
+            "bbox": [
+              719,
+              306,
+              97,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.62,
+            "bbox": [
+              718,
+              222,
+              98,
+              87
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.566,
+            "bbox": [
+              795,
+              366,
+              197,
+              59
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.553,
+            "bbox": [
+              580,
+              357,
+              170,
+              68
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.549,
+            "bbox": [
+              680,
+              271,
+              48,
+              60
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.524,
+            "bbox": [
+              603,
+              41,
+              140,
+              88
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.51,
+            "bbox": [
+              458,
+              360,
+              138,
+              67
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.497,
+            "bbox": [
+              785,
+              314,
+              130,
+              111
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.471,
+            "bbox": [
+              582,
+              255,
+              84,
+              86
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.469,
+            "bbox": [
+              902,
+              184,
+              96,
+              100
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.441,
+            "bbox": [
+              463,
+              279,
+              134,
+              80
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.423,
+            "bbox": [
+              459,
+              81,
+              29,
+              49
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.421,
+            "bbox": [
+              824,
+              132,
+              62,
+              37
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.971,
+            "bbox": [
+              56,
+              416,
+              82,
+              134
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.962,
+            "bbox": [
+              320,
+              473,
+              70,
+              104
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.906,
+            "bbox": [
+              298,
+              390,
+              169,
+              123
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.791,
+            "bbox": [
+              83,
+              510,
+              191,
+              145
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.746,
+            "bbox": [
+              306,
+              578,
+              204,
+              162
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.643,
+            "bbox": [
+              2,
+              354,
+              565,
+              399
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.508,
+            "bbox": [
+              77,
+              404,
+              160,
+              109
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.494,
+            "bbox": [
+              336,
+              524,
+              204,
+              110
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.483,
+            "bbox": [
+              57,
+              346,
+              145,
+              58
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.456,
+            "bbox": [
+              229,
+              403,
+              174,
+              146
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.441,
+            "bbox": [
+              405,
+              465,
+              162,
+              159
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.954,
+            "bbox": [
+              627,
+              419,
+              177,
+              112
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.922,
+            "bbox": [
+              788,
+              356,
+              181,
+              129
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.909,
+            "bbox": [
+              593,
+              489,
+              227,
+              212
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.895,
+            "bbox": [
+              456,
+              458,
+              156,
+              163
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.87,
+            "bbox": [
+              592,
+              373,
+              156,
+              124
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.837,
+            "bbox": [
+              833,
+              455,
+              185,
+              103
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.772,
+            "bbox": [
+              744,
+              615,
+              103,
+              142
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.64,
+            "bbox": [
+              856,
+              635,
+              167,
+              131
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.545,
+            "bbox": [
+              717,
+              535,
+              181,
+              224
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.529,
+            "bbox": [
+              923,
+              507,
+              99,
+              132
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "congestion-mathura-rd.jpg",
+        "expected": {
+          "total": 17,
+          "cars": 11,
+          "LMV": 11,
+          "HMV": 5,
+          "Motorcycle": 1
+        },
+        "got": {
+          "total": 13,
+          "cars": 9,
+          "LMV": 9,
+          "HMV": 4,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -4,
+          "cars": -2,
+          "LMV": -2,
+          "HMV": -1,
+          "Motorcycle": -1
+        },
+        "ms": 7208,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.991,
+            "bbox": [
+              124,
+              422,
+              434,
+              222
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.907,
+            "bbox": [
+              709,
+              329,
+              187,
+              132
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.817,
+            "bbox": [
+              -6,
+              402,
+              315,
+              196
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.801,
+            "bbox": [
+              519,
+              411,
+              129,
+              111
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.722,
+            "bbox": [
+              1057,
+              398,
+              32,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.663,
+            "bbox": [
+              954,
+              405,
+              62,
+              48
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.657,
+            "bbox": [
+              577,
+              418,
+              261,
+              137
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.603,
+            "bbox": [
+              19,
+              257,
+              422,
+              198
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.583,
+            "bbox": [
+              807,
+              426,
+              62,
+              89
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.542,
+            "bbox": [
+              568,
+              324,
+              148,
+              116
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.54,
+            "bbox": [
+              947,
+              411,
+              44,
+              47
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.503,
+            "bbox": [
+              307,
+              362,
+              156,
+              50
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.459,
+            "bbox": [
+              756,
+              414,
+              113,
+              109
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.991,
+            "bbox": [
+              124,
+              422,
+              434,
+              222
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.801,
+            "bbox": [
+              519,
+              411,
+              129,
+              111
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.724,
+            "bbox": [
+              7,
+              410,
+              232,
+              175
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.704,
+            "bbox": [
+              1091,
+              400,
+              43,
+              107
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.695,
+            "bbox": [
+              862,
+              408,
+              100,
+              252
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.663,
+            "bbox": [
+              954,
+              405,
+              62,
+              48
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.657,
+            "bbox": [
+              577,
+              418,
+              261,
+              137
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.583,
+            "bbox": [
+              807,
+              426,
+              62,
+              89
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.577,
+            "bbox": [
+              1032,
+              404,
+              35,
+              47
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "score": 0.503,
+            "bbox": [
+              307,
+              362,
+              156,
+              50
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "score": 0.401,
+            "bbox": [
+              526,
+              330,
+              185,
+              95
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.659,
+            "bbox": [
+              0,
+              401,
+              305,
+              72
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.603,
+            "bbox": [
+              19,
+              257,
+              422,
+              198
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.557,
+            "bbox": [
+              495,
+              408,
+              151,
+              65
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.907,
+            "bbox": [
+              709,
+              329,
+              187,
+              132
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.75,
+            "bbox": [
+              1088,
+              410,
+              33,
+              61
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.722,
+            "bbox": [
+              1057,
+              398,
+              32,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.684,
+            "bbox": [
+              999,
+              409,
+              59,
+              61
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.634,
+            "bbox": [
+              621,
+              416,
+              241,
+              57
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.543,
+            "bbox": [
+              883,
+              402,
+              74,
+              67
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.542,
+            "bbox": [
+              568,
+              324,
+              148,
+              116
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.54,
+            "bbox": [
+              947,
+              411,
+              44,
+              47
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.503,
+            "bbox": [
+              971,
+              407,
+              43,
+              61
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.971,
+            "bbox": [
+              129,
+              408,
+              414,
+              232
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.817,
+            "bbox": [
+              -6,
+              402,
+              315,
+              196
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.788,
+            "bbox": [
+              499,
+              409,
+              147,
+              120
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.78,
+            "bbox": [
+              575,
+              420,
+              135,
+              134
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.991,
+            "bbox": [
+              578,
+              413,
+              272,
+              150
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.986,
+            "bbox": [
+              974,
+              400,
+              99,
+              270
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.851,
+            "bbox": [
+              869,
+              401,
+              97,
+              267
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.752,
+            "bbox": [
+              1087,
+              406,
+              36,
+              93
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.608,
+            "bbox": [
+              1058,
+              398,
+              31,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.527,
+            "bbox": [
+              565,
+              410,
+              87,
+              114
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.48,
+            "bbox": [
+              942,
+              407,
+              52,
+              60
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.459,
+            "bbox": [
+              756,
+              414,
+              113,
+              109
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "trucks-freight-highway.jpg",
+        "expected": {
+          "total": 7,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 5,
+          "Motorcycle": 2
+        },
+        "got": {
+          "total": 2,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 2,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -5,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": -3,
+          "Motorcycle": -2
+        },
+        "ms": 7084,
+        "detections": [
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.893,
+            "bbox": [
+              1040,
+              433,
+              236,
+              165
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.524,
+            "bbox": [
+              796,
+              525,
+              46,
+              32
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "person",
+            "score": 0.551,
+            "bbox": [
+              567,
+              548,
+              24,
+              22
+            ],
+            "source": "full"
+          },
+          {
+            "label": "train",
+            "score": 0.459,
+            "bbox": [
+              1047,
+              426,
+              242,
+              162
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.763,
+            "bbox": [
+              570,
+              542,
+              15,
+              23
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.893,
+            "bbox": [
+              1040,
+              433,
+              236,
+              165
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.622,
+            "bbox": [
+              571,
+              542,
+              15,
+              25
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.524,
+            "bbox": [
+              796,
+              525,
+              46,
+              32
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "trucks-rajasthan.jpg",
+        "expected": {
+          "total": 8,
+          "cars": 2,
+          "LMV": 2,
+          "HMV": 5,
+          "Motorcycle": 1
+        },
+        "got": {
+          "total": 4,
+          "cars": 1,
+          "LMV": 1,
+          "HMV": 3,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -4,
+          "cars": -1,
+          "LMV": -1,
+          "HMV": -2,
+          "Motorcycle": -1
+        },
+        "ms": 7261,
+        "detections": [
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.95,
+            "bbox": [
+              466,
+              405,
+              197,
+              229
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.946,
+            "bbox": [
+              684,
+              194,
+              472,
+              554
+            ],
+            "source": "full"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.73,
+            "bbox": [
+              292,
+              483,
+              44,
+              47
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.725,
+            "bbox": [
+              370,
+              510,
+              30,
+              28
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "truck",
+            "score": 0.946,
+            "bbox": [
+              684,
+              194,
+              472,
+              554
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.725,
+            "bbox": [
+              370,
+              510,
+              30,
+              28
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.71,
+            "bbox": [
+              434,
+              400,
+              227,
+              222
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.453,
+            "bbox": [
+              780,
+              353,
+              78,
+              67
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.95,
+            "bbox": [
+              466,
+              405,
+              197,
+              229
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.73,
+            "bbox": [
+              292,
+              483,
+              44,
+              47
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.65,
+            "bbox": [
+              244,
+              513,
+              18,
+              45
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.564,
+            "bbox": [
+              206,
+              510,
+              14,
+              40
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.836,
+            "bbox": [
+              702,
+              352,
+              441,
+              375
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "trucks-russia.jpg",
+        "expected": {
+          "total": 6,
+          "cars": 2,
+          "LMV": 2,
+          "HMV": 4,
+          "Motorcycle": 0
+        },
+        "got": {
+          "total": 5,
+          "cars": 0,
+          "LMV": 0,
+          "HMV": 5,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -1,
+          "cars": -2,
+          "LMV": -2,
+          "HMV": 1,
+          "Motorcycle": 0
+        },
+        "ms": 7643,
+        "detections": [
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.995,
+            "bbox": [
+              215,
+              439,
+              693,
+              297
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.814,
+            "bbox": [
+              993,
+              524,
+              119,
+              99
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.767,
+            "bbox": [
+              1147,
+              554,
+              53,
+              53
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "category": "HMV",
+            "score": 0.578,
+            "bbox": [
+              208,
+              428,
+              375,
+              105
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.563,
+            "bbox": [
+              1217,
+              568,
+              35,
+              28
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "truck",
+            "score": 0.995,
+            "bbox": [
+              215,
+              439,
+              693,
+              297
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.769,
+            "bbox": [
+              994,
+              529,
+              107,
+              92
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.463,
+            "bbox": [
+              1151,
+              559,
+              57,
+              48
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.455,
+            "bbox": [
+              1210,
+              560,
+              50,
+              37
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.436,
+            "bbox": [
+              294,
+              472,
+              44,
+              48
+            ],
+            "source": "full"
+          },
+          {
+            "label": "truck",
+            "score": 0.578,
+            "bbox": [
+              208,
+              428,
+              375,
+              105
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.961,
+            "bbox": [
+              215,
+              430,
+              494,
+              297
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.927,
+            "bbox": [
+              571,
+              439,
+              323,
+              257
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.814,
+            "bbox": [
+              993,
+              524,
+              119,
+              99
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "truck",
+            "score": 0.767,
+            "bbox": [
+              1147,
+              554,
+              53,
+              53
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.563,
+            "bbox": [
+              1217,
+              568,
+              35,
+              28
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "fog-delhi.jpg",
+        "expected": {
+          "total": 37,
+          "cars": 27,
+          "LMV": 32,
+          "HMV": 2,
+          "Motorcycle": 3,
+          "dense": true
+        },
+        "got": {
+          "total": 2,
+          "cars": 2,
+          "LMV": 2,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -35,
+          "cars": -25,
+          "LMV": -30,
+          "HMV": -2,
+          "Motorcycle": -3
+        },
+        "ms": 6592,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.553,
+            "bbox": [
+              11,
+              593,
+              158,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.532,
+            "bbox": [
+              965,
+              468,
+              237,
+              331
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "traffic light",
+            "score": 0.451,
+            "bbox": [
+              700,
+              267,
+              63,
+              127
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.553,
+            "bbox": [
+              11,
+              593,
+              158,
+              101
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.406,
+            "bbox": [
+              51,
+              698,
+              80,
+              99
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.532,
+            "bbox": [
+              965,
+              468,
+              237,
+              331
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "urban-india.jpg",
+        "expected": {
+          "total": 15,
+          "cars": 13,
+          "LMV": 13,
+          "HMV": 1,
+          "Motorcycle": 1
+        },
+        "got": {
+          "total": 19,
+          "cars": 18,
+          "LMV": 18,
+          "HMV": 1,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": 4,
+          "cars": 5,
+          "LMV": 5,
+          "HMV": 0,
+          "Motorcycle": -1
+        },
+        "ms": 6597,
+        "detections": [
+          {
+            "label": "bus",
+            "category": "HMV",
+            "score": 0.925,
+            "bbox": [
+              7,
+              9,
+              457,
+              839
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.907,
+            "bbox": [
+              752,
+              388,
+              66,
+              72
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.897,
+            "bbox": [
+              1023,
+              426,
+              257,
+              238
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.868,
+            "bbox": [
+              1010,
+              399,
+              72,
+              51
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.849,
+            "bbox": [
+              631,
+              375,
+              33,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.81,
+            "bbox": [
+              806,
+              388,
+              132,
+              128
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.803,
+            "bbox": [
+              573,
+              384,
+              53,
+              51
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.798,
+            "bbox": [
+              898,
+              400,
+              62,
+              49
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.76,
+            "bbox": [
+              730,
+              373,
+              33,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.661,
+            "bbox": [
+              954,
+              403,
+              40,
+              42
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.645,
+            "bbox": [
+              958,
+              395,
+              30,
+              35
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.574,
+            "bbox": [
+              645,
+              384,
+              29,
+              29
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.521,
+            "bbox": [
+              569,
+              376,
+              35,
+              23
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.52,
+            "bbox": [
+              699,
+              374,
+              21,
+              30
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.506,
+            "bbox": [
+              765,
+              378,
+              40,
+              26
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.496,
+            "bbox": [
+              1036,
+              394,
+              250,
+              77
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.472,
+            "bbox": [
+              626,
+              370,
+              26,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.446,
+            "bbox": [
+              712,
+              374,
+              23,
+              29
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.421,
+            "bbox": [
+              682,
+              376,
+              22,
+              28
+            ],
+            "source": "tile"
+          }
+        ],
+        "raw": [
+          {
+            "label": "bus",
+            "score": 0.925,
+            "bbox": [
+              7,
+              9,
+              457,
+              839
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.907,
+            "bbox": [
+              752,
+              388,
+              66,
+              72
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.897,
+            "bbox": [
+              1023,
+              426,
+              257,
+              238
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.868,
+            "bbox": [
+              1010,
+              399,
+              72,
+              51
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.798,
+            "bbox": [
+              898,
+              400,
+              62,
+              49
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.782,
+            "bbox": [
+              562,
+              384,
+              60,
+              53
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.765,
+            "bbox": [
+              449,
+              392,
+              20,
+              65
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.689,
+            "bbox": [
+              631,
+              379,
+              38,
+              35
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.661,
+            "bbox": [
+              954,
+              403,
+              40,
+              42
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.446,
+            "bbox": [
+              712,
+              374,
+              23,
+              29
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.435,
+            "bbox": [
+              508,
+              393,
+              19,
+              41
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.409,
+            "bbox": [
+              520,
+              389,
+              16,
+              25
+            ],
+            "source": "full"
+          },
+          {
+            "label": "person",
+            "score": 0.899,
+            "bbox": [
+              430,
+              379,
+              24,
+              82
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.874,
+            "bbox": [
+              559,
+              383,
+              67,
+              49
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.873,
+            "bbox": [
+              461,
+              378,
+              19,
+              66
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.849,
+            "bbox": [
+              631,
+              375,
+              33,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.772,
+            "bbox": [
+              500,
+              383,
+              19,
+              49
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.521,
+            "bbox": [
+              569,
+              376,
+              35,
+              23
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.421,
+            "bbox": [
+              682,
+              376,
+              22,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.417,
+            "bbox": [
+              2,
+              48,
+              447,
+              422
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.883,
+            "bbox": [
+              756,
+              408,
+              61,
+              55
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.849,
+            "bbox": [
+              640,
+              375,
+              32,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.803,
+            "bbox": [
+              573,
+              384,
+              53,
+              51
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.797,
+            "bbox": [
+              1007,
+              408,
+              65,
+              50
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.76,
+            "bbox": [
+              730,
+              373,
+              33,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.712,
+            "bbox": [
+              810,
+              388,
+              149,
+              88
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.645,
+            "bbox": [
+              958,
+              395,
+              30,
+              35
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.52,
+            "bbox": [
+              699,
+              374,
+              21,
+              30
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.517,
+            "bbox": [
+              575,
+              375,
+              40,
+              25
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.506,
+            "bbox": [
+              765,
+              378,
+              40,
+              26
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.496,
+            "bbox": [
+              1036,
+              394,
+              250,
+              77
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.472,
+            "bbox": [
+              626,
+              370,
+              26,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.896,
+            "bbox": [
+              428,
+              379,
+              27,
+              82
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.851,
+            "bbox": [
+              458,
+              380,
+              22,
+              64
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.769,
+            "bbox": [
+              560,
+              389,
+              66,
+              43
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "bus",
+            "score": 0.649,
+            "bbox": [
+              4,
+              369,
+              445,
+              481
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.622,
+            "bbox": [
+              636,
+              383,
+              32,
+              28
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.574,
+            "bbox": [
+              500,
+              380,
+              20,
+              53
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.849,
+            "bbox": [
+              1019,
+              408,
+              263,
+              257
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.81,
+            "bbox": [
+              806,
+              388,
+              132,
+              128
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.645,
+            "bbox": [
+              574,
+              388,
+              50,
+              48
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.629,
+            "bbox": [
+              755,
+              406,
+              61,
+              57
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.628,
+            "bbox": [
+              958,
+              398,
+              31,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.574,
+            "bbox": [
+              645,
+              384,
+              29,
+              29
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.498,
+            "bbox": [
+              1008,
+              406,
+              65,
+              52
+            ],
+            "source": "tile"
+          }
+        ]
+      },
+      {
+        "file": "bus-us1-belair.jpg",
+        "expected": {
+          "total": 14,
+          "cars": 14,
+          "LMV": 14,
+          "HMV": 0,
+          "Motorcycle": 0,
+          "note": "includes cars parked along the right; first hand count missed them"
+        },
+        "got": {
+          "total": 8,
+          "cars": 8,
+          "LMV": 8,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "err": {
+          "total": -6,
+          "cars": -6,
+          "LMV": -6,
+          "HMV": 0,
+          "Motorcycle": 0
+        },
+        "ms": 6667,
+        "detections": [
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.909,
+            "bbox": [
+              491,
+              526,
+              140,
+              97
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.844,
+            "bbox": [
+              874,
+              546,
+              30,
+              19
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.811,
+            "bbox": [
+              827,
+              543,
+              39,
+              22
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.738,
+            "bbox": [
+              699,
+              545,
+              15,
+              13
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.614,
+            "bbox": [
+              718,
+              546,
+              22,
+              16
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.528,
+            "bbox": [
+              689,
+              538,
+              20,
+              20
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.465,
+            "bbox": [
+              902,
+              547,
+              32,
+              24
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "category": "LMV",
+            "score": 0.457,
+            "bbox": [
+              354,
+              534,
+              42,
+              27
+            ],
+            "source": "full"
+          }
+        ],
+        "raw": [
+          {
+            "label": "car",
+            "score": 0.811,
+            "bbox": [
+              827,
+              543,
+              39,
+              22
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.703,
+            "bbox": [
+              504,
+              530,
+              126,
+              91
+            ],
+            "source": "full"
+          },
+          {
+            "label": "traffic light",
+            "score": 0.697,
+            "bbox": [
+              608,
+              458,
+              12,
+              20
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.614,
+            "bbox": [
+              718,
+              546,
+              22,
+              16
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.465,
+            "bbox": [
+              902,
+              547,
+              32,
+              24
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.457,
+            "bbox": [
+              354,
+              534,
+              42,
+              27
+            ],
+            "source": "full"
+          },
+          {
+            "label": "traffic light",
+            "score": 0.434,
+            "bbox": [
+              648,
+              461,
+              9,
+              16
+            ],
+            "source": "full"
+          },
+          {
+            "label": "car",
+            "score": 0.909,
+            "bbox": [
+              491,
+              526,
+              140,
+              97
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.528,
+            "bbox": [
+              689,
+              538,
+              20,
+              20
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.844,
+            "bbox": [
+              874,
+              546,
+              30,
+              19
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.738,
+            "bbox": [
+              699,
+              545,
+              15,
+              13
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.567,
+            "bbox": [
+              997,
+              532,
+              16,
+              33
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "person",
+            "score": 0.432,
+            "bbox": [
+              971,
+              534,
+              14,
+              32
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "traffic light",
+            "score": 0.428,
+            "bbox": [
+              699,
+              471,
+              7,
+              13
+            ],
+            "source": "tile"
+          },
+          {
+            "label": "car",
+            "score": 0.419,
+            "bbox": [
+              838,
+              543,
+              22,
+              17
+            ],
+            "source": "tile"
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "total": {
+        "mae": 11.67,
+        "expectedTotal": 386,
+        "detectedTotal": 184
+      },
+      "cars": {
+        "mae": 6.44,
+        "expectedTotal": 239,
+        "detectedTotal": 135
+      },
+      "LMV": {
+        "mae": 8.33,
+        "expectedTotal": 276,
+        "detectedTotal": 136
+      },
+      "HMV": {
+        "mae": 1.94,
+        "expectedTotal": 60,
+        "detectedTotal": 35
+      },
+      "Motorcycle": {
+        "mae": 2.17,
+        "expectedTotal": 50,
+        "detectedTotal": 13
+      },
+      "countAccuracy": 0.456,
+      "avgMs": 6937,
+      "modelLoadMs": 4869,
+      "backend": "tfjs-webgl",
+      "model": "ssd",
+      "options": {
+        "tiles": true
+      }
+    }
+  },
+  "error": null
+}

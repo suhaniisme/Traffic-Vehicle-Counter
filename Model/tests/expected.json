@@ -1,0 +1,23 @@
+{
+  "policy": "Hand-counted at 1280px width. Counted: every vehicle a person can individually identify and classify. Far-away specks are not counted. Auto-rickshaws and pickups/vans are LMV (Indian Motor Vehicles Act usage) but are not 'cars'. Bicycles are not counted. 'dense' images have an uncertain ground truth of roughly +/-15%.",
+  "images": {
+    "highway-jam-malaysia.jpg":   { "total": 32, "cars": 28, "LMV": 30, "HMV": 1, "Motorcycle": 1, "dense": true },
+    "highway-jam-m62.jpg":        { "total": 38, "cars": 20, "LMV": 22, "HMV": 16, "Motorcycle": 0, "dense": true },
+    "highway-jam-d1.jpg":         { "total": 16, "cars": 9, "LMV": 10, "HMV": 6, "Motorcycle": 0 },
+    "city-bangalore.jpg":         { "total": 20, "cars": 6, "LMV": 11, "HMV": 2, "Motorcycle": 7 },
+    "city-delhi-motion.jpg":      { "total": 7, "cars": 5, "LMV": 6, "HMV": 0, "Motorcycle": 1 },
+    "motorcycles-hyderabad.jpg":  { "total": 17, "cars": 3, "LMV": 7, "HMV": 0, "Motorcycle": 10 },
+    "mixed-pune.jpg":             { "total": 11, "cars": 3, "LMV": 4, "HMV": 4, "Motorcycle": 3 },
+    "bus-firetruck-jakarta.jpg":  { "total": 18, "cars": 5, "LMV": 7, "HMV": 2, "Motorcycle": 9 },
+    "city-bangkok.jpg":           { "total": 53, "cars": 48, "LMV": 50, "HMV": 2, "Motorcycle": 1, "dense": true },
+    "city-traffic.jpg":           { "total": 0, "cars": 0, "LMV": 0, "HMV": 0, "Motorcycle": 0, "note": "long exposure, only light trails: false-positive check" },
+    "jam-delhi.jpg":              { "total": 70, "cars": 43, "LMV": 55, "HMV": 5, "Motorcycle": 10, "dense": true },
+    "congestion-mathura-rd.jpg":  { "total": 17, "cars": 11, "LMV": 11, "HMV": 5, "Motorcycle": 1 },
+    "trucks-freight-highway.jpg": { "total": 7, "cars": 0, "LMV": 0, "HMV": 5, "Motorcycle": 2 },
+    "trucks-rajasthan.jpg":       { "total": 8, "cars": 2, "LMV": 2, "HMV": 5, "Motorcycle": 1 },
+    "trucks-russia.jpg":          { "total": 6, "cars": 2, "LMV": 2, "HMV": 4, "Motorcycle": 0 },
+    "fog-delhi.jpg":              { "total": 37, "cars": 27, "LMV": 32, "HMV": 2, "Motorcycle": 3, "dense": true },
+    "urban-india.jpg":            { "total": 15, "cars": 13, "LMV": 13, "HMV": 1, "Motorcycle": 1 },
+    "bus-us1-belair.jpg":         { "total": 14, "cars": 14, "LMV": 14, "HMV": 0, "Motorcycle": 0, "note": "includes cars parked along the right; first hand count missed them" }
+  }
+}
