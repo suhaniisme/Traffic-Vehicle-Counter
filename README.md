@@ -35,9 +35,6 @@ By leveraging advanced computer vision algorithms and deep learning object detec
 * **Programming Language**: Python 3.8+
 * **Numerical & Data Processing**: NumPy / Pandas for managing count statistics and coordinate tracking.
 
-### **Development & Tooling**
-* **Version Control**: Git & GitHub for codebase management and tracking repository updates.
-
 ---
 
 ## 🏗️ Project Architecture & Structure
